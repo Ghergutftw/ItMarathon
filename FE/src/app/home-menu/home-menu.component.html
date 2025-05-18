@@ -1,8 +1,14 @@
 <div class="app-container">
   <aside class="sidebar">
-    <button (click)="navigateTo('/home')"> Home</button>
-    <button (click)="navigateTo('/conversations')"> Conversations</button>
-    <button (click)="navigateTo('/settings')"> Settings</button>
+    <button (click)="navigateTo('/home')">
+      <i class="fa-solid fa-house" style="color: #ffffff;"></i>
+    </button>
+    <button (click)="navigateTo('/conversations')">
+      <i class="fa-solid fa-message" style="color: #ffffff;"></i>
+    </button>
+    <button (click)="navigateTo('/settings')">
+      <i class="fa-solid fa-gear" style="color: #ffffff;"></i>
+    </button>
   </aside>
 
   <main class="main-content">
