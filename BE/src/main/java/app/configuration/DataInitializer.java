@@ -6,17 +6,12 @@ import app.entity.User;
 import app.enums.ROLES;
 import app.repository.ConversationRepository;
 import app.repository.MessageRepository;
-import com.github.jaiimageio.impl.common.ImageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import app.repository.UserRepository;
 
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 
@@ -57,26 +52,12 @@ public class DataInitializer implements CommandLineRunner {
         user1.setFriends(Set.of(user1));
         user2.setFriends(Set.of(user3));
 
-        userRepository.saveAll(List.of(user1, user2, user3));
-
-        Message message1 = new Message();
-        message1.setTimestamp(Instant.now());
-        message1.setFromUser(user1);
-        try (InputStream is = ImageUtil.class.getClassLoader().getResourceAsStream("1305B_1306A.png")) {
-            if (is == null) {
-                throw new IllegalArgumentException("Image not found: 1305B_1306A.png");
-            }
-            message1.setImageData(is.readAllBytes());
-        }
-
-        messageRepository.save(message1);
-
         Conversation conversation1 = new Conversation();
         conversation1.setName("madalin");
         conversation1.setUsers(List.of(user1, user2));
-        conversation1.setMessages(List.of(message1));
 
-        conversationRepository.save(conversation1);
+        userRepository.saveAll(List.of(user1, user2, user3));
+
 
         System.out.println("✅ Database initialized with sample data!");
     }

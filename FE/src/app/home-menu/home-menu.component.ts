@@ -18,6 +18,6 @@ export class HomeMenuComponent {
   }
 
   navigateTo(path: string) {
-    this.router.navigate(['/home-menu', path]);
+    this.router.navigate(['/']);
   }
 }
