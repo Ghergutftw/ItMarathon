@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.user).subscribe({
         next: (response) => {
           if (response.body?.status === 'success') {
-            sessionStorage.setItem("user", JSON.stringify(this.user.name));
+            sessionStorage.setItem("user", JSON.stringify(this.user.name).toString());
             this.router.navigate(['/home-menu']);
           } else {
             this.passwordError = 'Invalid credentials';
@@ -150,8 +150,9 @@ export class LoginComponent implements OnInit {
 
     this.isLoading = true;
     this.error = null;
+    let user_name = 'madalin';
 
-    this.messageService.sendMessage(this.selectedFile, this.messageText).subscribe({
+    this.messageService.sendMessage(this.selectedFile, this.messageText,user_name).subscribe({
       next: (response) => {
         this.isLoading = false;
         this.messageId = response.id;

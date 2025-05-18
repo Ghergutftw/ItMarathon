@@ -2,33 +2,21 @@
   <div id="convGroupsPeople">
     <div id="groups">
       <h2>Groups</h2>
-      <div class="grid-item">
-        <span>aaaaaaaa</span>
-      </div>
-      <div class="grid-item">
-        <span>aaaaaaaa</span>
-      </div>
-      <div class="grid-item">
-        <span>aaaaaaaa</span>
+      <div class="grid-item" *ngFor="let group of groups">
+        <span>{{group.name}}</span>
       </div>
     </div>
 
     <div id="people">
       <h2>People</h2>
-      <div class="grid-item">
-        <span>aaaaaaaa</span>
-      </div>
-      <div class="grid-item">
-        <span>aaaaaaaa</span>
-      </div>
-      <div class="grid-item">
-        <span>aaaaaaaa</span>
+      <div class="grid-item" *ngFor="let people of peoples">
+        <span>{{getParticipantInAPeopleConversation(people)}}</span>
       </div>
     </div>
   </div>
   <div id="messages">
     <div id="conversationName">
-      <h2>{{conversation.name}}</h2>
+      <h2>Nume</h2>
     </div>
     <div class="sent-message">
       <span>MESSAGE SENT</span>
