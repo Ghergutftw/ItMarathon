@@ -1,6 +1,8 @@
 package app.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
@@ -10,7 +12,6 @@ public class SignUpDTO {
     private String name;
     private String email;
     private String password;
-    private String phoneNumber;
 
     public String getName() {
         return name;
@@ -36,11 +37,4 @@ public class SignUpDTO {
         this.password = password;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 }

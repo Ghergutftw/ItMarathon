@@ -1,17 +1,17 @@
 import {Routes} from '@angular/router';
 import {ConversationsComponent} from './conversations/conversations.component';
 import {SettingsComponent} from './settings/settings.component';
-import {HomeComponent} from './home/home.component';
+import {RequestComponent} from './request/request.component';
 
 export const homeMenuRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'conversations',
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    component: HomeComponent,
+    path: 'request',
+    component: RequestComponent,
   },
   {
     path: "conversations",

@@ -5,15 +5,19 @@ import app.dto.SignUpDTO;
 import app.dto.UpdatePasswordDTO;
 import app.dto.UserDTO;
 import app.entity.User;
-import app.repository.UserRepository;
 import app.enums.ROLES;
+import app.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Type;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -21,12 +25,13 @@ import java.util.UUID;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final ModelMapper mapper;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, ModelMapper mapper) {
         this.userRepository = userRepository;
+        this.mapper = mapper;
     }
 
-//    Check if name exists
     public ResponseEntity<Response> checkNameExists(String name) {
         Optional<User> user = userRepository.findByName(name);
         if (user.isPresent()) {
@@ -40,7 +45,7 @@ public class UserService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(sign.getPassword());
 
-        user.setRole(ROLES.USER); // Set role explicitly
+        user.setRole(ROLES.USER);
         user.setPassword(encodedPassword);
         user.setName(sign.getName());
         user.setEmail(sign.getEmail());
@@ -87,13 +92,33 @@ public class UserService {
 
     public UserDTO updateUser(int id, User user) {
         Optional<User> userToUpdate = userRepository.findById(UUID.fromString(String.valueOf(id)));
+
         if (userToUpdate.isPresent()) {
             User updatedUser = userToUpdate.get();
             updatedUser.setName(user.getName());
             updatedUser.setEmail(user.getEmail());
             updatedUser.setPassword(user.getPassword());
             userRepository.save(updatedUser);
-            return new UserDTO(updatedUser.getId(), updatedUser.getName(), updatedUser.getEmail(), updatedUser.getRole(), updatedUser.getCoins(), updatedUser.getPremium());
+
+            Type setType = new TypeToken<Set<UserDTO>>() {
+            }.getType();
+            Set<UserDTO> friendsDto = mapper.map(updatedUser.getFriends(), setType);
+            Set<UserDTO> friendRequestsDto = mapper.map(updatedUser.getFriendRequests(), setType);
+
+            return new UserDTO(
+                    updatedUser.getId(),
+                    updatedUser.getName(),
+                    updatedUser.getPassword(),
+                    updatedUser.getEmail(),
+                    updatedUser.getRole(),
+                    updatedUser.getBanned(),
+                    updatedUser.getMessageSent(),
+                    friendsDto,
+                    friendRequestsDto,
+                    updatedUser.getConversations(),
+                    updatedUser.getCoins(),
+                    updatedUser.getPremium()
+            );
         } else {
             return null;
         }

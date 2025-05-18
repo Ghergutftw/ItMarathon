@@ -1,23 +1,26 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormsModule, NgForm} from '@angular/forms';
-import {User} from './user.model';
+import {User} from '../models/user.model';
 import {Router} from "@angular/router";
 import {NgIf} from "@angular/common";
+import {SignUp} from '../models/signup.model';
 import {MessageService} from '../service/message.service';
 import {LoginService} from '../service/login.service';
 
 @Component({
+  standalone: true,
   selector: 'app-login',
   imports: [FormsModule, NgIf],
   templateUrl: "login.component.html",
-  standalone: true,
   styleUrls: ["login.component.css"]
 })
 export class LoginComponent implements OnInit {
-  confirmPasswd: string | null = null;
-  confirmPasswdError: string | null = null;
   user: User = new User();
-  passwordError: string = "";
+  signUpData: SignUp = new SignUp();
+  confirmPasswd: string | null = null;
+  passwordError: string | null = null;
+  confirmPasswdError: string | null = null;
+
   messageText: string = '';
   selectedFile: File | null = null;
   text: string = '';
@@ -42,12 +45,6 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
-  }
-
-  onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0];
-    this.sendSuccess = false;
-    this.sendError = '';
   }
 
   togglePanel() {
@@ -93,53 +90,55 @@ export class LoginComponent implements OnInit {
     }
   }
 
-
   verifyPassword() {
     console.log("login")
-    if (this.user.password == undefined) {
-      this.passwordError = "Password cannot be null";
-      return;
-    }
-
-    if (this.user.password.length < 8) {
-      this.passwordError = "Password must have at least 8 characters";
-      return
-    }
-    if (this.user.password.length < 8) {
-      this.passwordError = "Password must have at least 8 characters";
-    }
-
-    if (!/[A-Z]/.test(this.user.password)) {
-      this.passwordError = "Password must contain at least one uppercase";
-      return;
-    }
-
-    if (!/[a-z]/.test(this.user.password)) {
-      this.passwordError = "Password must contain at least one lowercase";
-      return;
-    }
-
-    if (!/[0-9]/.test(this.user.password)) {
-      this.passwordError = "Password must contain at least one digit";
-      return;
-    }
-
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(this.user.password)) {
-      this.passwordError = "Password must contain at least one special character";
-      return;
-    }
-
-    this.passwordError = "";
+    // if (this.signUpData.password == undefined) {
+    //     this.passwordError = "Password cannot be null";
+    //     return;
+    // }
+    //
+    // if (this.signUpData.password.length < 8) {
+    //     this.passwordError = "Password must have at least 8 characters";
+    //     return
+    // }
+    //
+    // if (!/[A-Z]/.test(this.signUpData.password)) {
+    //     this.passwordError = "Password must contain at least one uppercase";
+    //     return;
+    // }
+    //
+    // if (!/[a-z]/.test(this.signUpData.password)) {
+    //     this.passwordError = "Password must contain at least one lowercase";
+    //     return;
+    // }
+    //
+    // if (!/[0-9]/.test(this.signUpData.password)) {
+    //     this.passwordError = "Password must contain at least one digit";
+    //     return;
+    // }
+    //
+    // if (!/[!@#$%^&*(),.?":{}|<>]/.test(this.signUpData.password)) {
+    //     this.passwordError = "Password must contain at least one special character";
+    //     return;
+    // }
+    //
+    // this.passwordError = "";
   }
 
   confirmPassword() {
     if (this.confirmPasswd) {
-      if (!(this.confirmPasswd === this.user.password)) {
+      if (!(this.confirmPasswd === this.signUpData.password)) {
         this.confirmPasswdError = "Passwords do not match";
       } else {
         this.confirmPasswdError = null;
       }
     }
+  }
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+    this.sendSuccess = false;
+    this.sendError = '';
   }
 
   sendMessage(): void {

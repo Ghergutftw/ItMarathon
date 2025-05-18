@@ -3,9 +3,10 @@
         <div class="form-container sign-up-container">
             <form #signUpForm="ngForm" (ngSubmit)="onSignUp(signUpForm)">
                 <h1>Create Account</h1>
-                <input type="text" placeholder="Name" [(ngModel)]="user.name" name="name" required>
-                <input type="email" placeholder="Email" [(ngModel)]="user.email" name="email" required>
-                <input type="password" placeholder="Password" (input)="verifyPassword()" [(ngModel)]="user.password" name="password" required>
+              <input [(ngModel)]="signUpData.name" name="name" placeholder="Name" required type="text">
+              <input [(ngModel)]="signUpData.email" name="email" placeholder="Email" required type="email">
+              <input (input)="verifyPassword()" [(ngModel)]="signUpData.password" name="password" placeholder="Password"
+                     required type="password">
                 <div *ngIf="passwordError">
                     <span class="error">{{passwordError}}</span>
                 </div>

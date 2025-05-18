@@ -1,0 +1,9 @@
+<div id="requests">
+  <div *ngIf="requests.length > 0">
+    <div *ngFor="let req of requests; let i = index">
+      <div [id]="'request-' + i" class="request">
+        {{ req.name }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,8 @@
 package app.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -16,6 +17,14 @@ public class Response {
     public Response(String status, String message) {
         this.status = status;
         this.message = message;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
 }
