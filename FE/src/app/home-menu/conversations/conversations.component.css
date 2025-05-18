@@ -29,15 +29,84 @@ h2 {
 
 #groups, #people{
   display: grid;
-
-
   padding: 10px;
   width: 100%;
-
   border-radius: 20px;
   box-shadow: 0 5px 5px #4353795c;
   background-color: white;
   color: black;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.found-user {
+  width: 100%;
+}
+
+ul {
+}
+
+.search-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  width: 100%;
+}
+
+.search-block span {
+  padding: 0 15px;
+}
+
+.search-block i {
+  font-size: 1.2rem;
+  color: #3f5378;
+  background-color: transparent;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.search-block i:hover {
+  color: #ff4190;
+}
+
+#searchBar, #found {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  border-radius: 20px;
+  background-color: white;
+  color: black;
+  gap: 10px;
+}
+
+#searchBar i {
+  background-color: white;
+}
+
+#searchBar input {
+  flex-grow: 1;
+  border: none;
+}
+
+#searchBar input:focus {
+  outline: none;
+}
+
+#searchBar i {
+  cursor: pointer;
+  font-size: 1.2rem;
 }
 
 .grid-item {

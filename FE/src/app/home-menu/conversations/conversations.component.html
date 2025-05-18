@@ -1,11 +1,26 @@
 <div id="conversations">
-  <div id="convGroupsPeople">
-    <div id="groups">
-      <h2>Groups</h2>
-      <div class="grid-item" *ngFor="let group of groups">
-        <span>{{group.name}}</span>
-      </div>
-    </div>
+    <div id="convGroupsPeople">
+        <div id="searchBar">
+            <input (keyup.enter)="searchUser()" [(ngModel)]="userNameToSearch" [placeholder]="'Search for user'"
+                   type="text"/>
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <div *ngIf="foundUser && foundUser.name" class="found-user">
+            <ul>
+                <li class="search-block">
+                    <span>{{ foundUser.name }}</span>
+                    <i (click)="sendFriendRequest(foundUser)" class="fa-solid fa-user-plus"></i>
+                </li>
+            </ul>
+        </div>
+
+        <div id="groups">
+            <h2>Groups</h2>
+            <div *ngFor="let group of groups" class="grid-item">
+                <span>{{ group.name }}</span>
+            </div>
+        </div>
 
     <div id="people">
       <h2>People</h2>

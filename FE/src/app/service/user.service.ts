@@ -24,6 +24,10 @@ export class UserService {
         return this.http.post<HttpResponse<any>>(`${this.apiServerUrl}/login`, user)
     }
 
+    public findByName(name: string): Observable<HttpResponse<User>> {
+        return this.http.get<User>(`${this.apiServerUrl}/user-service/find-by-name/${name}`, {observe: "response"})
+    }
+
     // public logout(user: User): Observable<HttpResponse<any>> {
     //   return this.http.get<HttpResponse<any>>(`${this.apiServerUrl}/logout`, user)
     // }

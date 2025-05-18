@@ -24,6 +24,9 @@ public class UserDTO {
     private Integer coins;
     private Boolean premium;
 
+    public UserDTO() {
+    }
+
     public UserDTO(
             UUID id,
             String name,
@@ -50,5 +53,101 @@ public class UserDTO {
         this.conversations = conversations;
         this.coins = coins;
         this.premium = premium;
+    }
+
+    public Boolean getBanned() {
+        return banned;
+    }
+
+    public void setBanned(Boolean banned) {
+        this.banned = banned;
+    }
+
+    public Integer getCoins() {
+        return coins;
+    }
+
+    public void setCoins(Integer coins) {
+        this.coins = coins;
+    }
+
+    public Set<Conversation> getConversations() {
+        return conversations;
+    }
+
+    public void setConversations(Set<Conversation> conversations) {
+        this.conversations = conversations;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Set<UserDTO> getFriendRequests() {
+        return friendRequests;
+    }
+
+    public void setFriendRequests(Set<UserDTO> friendRequests) {
+        this.friendRequests = friendRequests;
+    }
+
+    public Set<UserDTO> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(Set<UserDTO> friends) {
+        this.friends = friends;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getMessageSent() {
+        return messageSent;
+    }
+
+    public void setMessageSent(Integer messageSent) {
+        this.messageSent = messageSent;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getPremium() {
+        return premium;
+    }
+
+    public void setPremium(Boolean premium) {
+        this.premium = premium;
+    }
+
+    public ROLES getRole() {
+        return role;
+    }
+
+    public void setRole(ROLES role) {
+        this.role = role;
     }
 }

@@ -40,6 +40,15 @@ public class UserService {
         return ResponseEntity.ok(new Response("failed", "Username does not exist"));
     }
 
+    public ResponseEntity<UserDTO> findByName(String name) {
+        Optional<User> userOpt = userRepository.findByName(name);
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        UserDTO userDTO = mapper.map(userOpt.get(), UserDTO.class);
+        return ResponseEntity.ok(userDTO);
+    }
+
     public ResponseEntity<Response> createUser(SignUpDTO sign) {
         User user = new User();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
