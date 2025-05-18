@@ -1,28 +1,28 @@
 package dto;
 
-import entity.User;
+import enums.ROLES;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.util.List;
 import java.util.UUID;
 
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class UserDTO {
-    public UUID id;
-    public String name;
-    public String email;
-    public String password;
-    public String role;
-    public Boolean banned;
-    public Integer coins;
-    public Integer messageSent;
-    public Boolean premium;
-    public List<User> friends;
-    public User friendRequest;
+    private UUID id;
+    private String name;
+    private String email;
+    private ROLES role;
+    private Integer coins;
+    private Boolean premium;
+
+    public UserDTO(UUID id, String name, String email, ROLES role, Integer coins, Boolean premium) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.role = role;
+        this.coins = coins;
+        this.premium = premium;
+    }
 }

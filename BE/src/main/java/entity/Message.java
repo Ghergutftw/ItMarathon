@@ -16,8 +16,9 @@ public class Message {
     @Column(name = "MESSAGES", nullable = false)
     private byte[] messages;
 
-    @Column(name = "STATUS", nullable = false)
-    private ROLES status;
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ROLES role;
 
     @OneToOne(fetch = FetchType.EAGER)
     private User fromUser;

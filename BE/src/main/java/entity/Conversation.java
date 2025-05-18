@@ -14,14 +14,6 @@ public class Conversation {
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "message")
     private List<Message> messages = new ArrayList<>();
 
-
-    /*
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name="USER_CONVERSATION",
-            joinColumns = @JoinColumn(name="USER_ID"),
-            inverseJoinColumns = @JoinColumn(name="CONVERSATION_ID")
-    )*/
     @OneToMany(fetch = FetchType.EAGER)
     private List<User> users;
 }
