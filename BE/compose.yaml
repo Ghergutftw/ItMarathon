@@ -3,7 +3,7 @@ version: '3.8'
 services:
   mysql:
     image: mysql:8.0
-    container_name: appointment-mysql
+    container_name: mydatabase
     environment:
       MYSQL_DATABASE: mydatabase
       MYSQL_USER: myuser
