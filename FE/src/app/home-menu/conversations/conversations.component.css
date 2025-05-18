@@ -22,7 +22,7 @@
 
 h2 {
   font-size: 1.2em;
-  font-family: Arial, sans-serif;
+  font-family: inherit;
   margin: 10px;
   color: #3f5378;
 }
