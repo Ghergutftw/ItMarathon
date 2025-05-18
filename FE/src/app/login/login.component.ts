@@ -12,6 +12,9 @@ import {NgIf} from "@angular/common";
 })
 export class LoginComponent implements OnInit {
     user: User = new User();
+    confirmPasswd: string|null = null;
+    passwordError: string|null = null;
+    confirmPasswdError: string|null = null;
 
     @ViewChild('container') containerRef?: ElementRef;
     @ViewChild('loginButton') loginButtonRef?: ElementRef;
@@ -21,8 +24,6 @@ export class LoginComponent implements OnInit {
         private router: Router) {
 
     }
-
-    passwordError: string = "";
 
     ngOnInit() {
     }
@@ -59,6 +60,7 @@ export class LoginComponent implements OnInit {
 
         if (this.user.password.length < 8) {
             this.passwordError = "Password must have at least 8 characters";
+            return
         }
 
         if (!/[A-Z]/.test(this.user.password)) {
@@ -82,5 +84,15 @@ export class LoginComponent implements OnInit {
         }
 
         this.passwordError = "";
+    }
+
+    confirmPassword(){
+        if(this.confirmPasswd) {
+            if (!(this.confirmPasswd === this.user.password)) {
+                this.confirmPasswdError = "Passwords do not match";
+            } else {
+                this.confirmPasswdError = null;
+            }
+        }
     }
 }
