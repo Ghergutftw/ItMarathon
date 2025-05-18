@@ -43,3 +43,58 @@
         </div>
     </div>
 </div>
+
+<div class="container">
+  <!-- Send Message Section -->
+  <div class="section">
+    <h2>Send Hidden Message</h2>
+
+    <div class="form-group">
+      <label>Image:</label>
+      <input type="file" (change)="onFileSelected($event)" accept="image/*">
+    </div>
+
+    <div class="form-group">
+      <label>Message to hide:</label>
+      <textarea [(ngModel)]="messageText" rows="3"></textarea>
+    </div>
+
+    <button (click)="sendMessage()" [disabled]="!selectedFile || !messageText || isLoading">
+      {{ isLoading ? 'Sending...' : 'Send Message' }}
+    </button>
+
+    <div *ngIf="messageId" class="success">
+      Message sent successfully! ID: {{ messageId }}
+    </div>
+  </div>
+
+  <!-- Retrieve Message Section -->
+  <div class="section">
+    <h2>Retrieve Hidden Message</h2>
+
+    <div class="form-group">
+      <label>Message ID:</label>
+      <input type="text" [(ngModel)]="messageId">
+    </div>
+
+    <button (click)="getMessage()" [disabled]="!messageId || isLoading">
+      {{ isLoading ? 'Loading...' : 'Get Message' }}
+    </button>
+
+    <div *ngIf="messageData" class="message-display">
+      <h3>Hidden Message</h3>
+      <img [src]="messageData.imageUrl" alt="Message image">
+      <div class="hidden-text">
+        <p>{{ messageData.decryptedText }}</p>
+      </div>
+      <div class="meta">
+        <p>From: {{ messageData.fromUser?.username || 'Unknown' }}</p>
+        <p>Status: {{ messageData.status }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+</div>
