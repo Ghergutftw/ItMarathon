@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 
 @Component({
+    standalone: true,
     selector: 'app-conversations',
     imports: [],
     templateUrl: './conversations.component.html',

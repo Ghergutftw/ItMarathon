@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 
 @Component({
+    standalone: true,
     selector: 'home-settings',
     imports: [],
     templateUrl: './settings.component.html',

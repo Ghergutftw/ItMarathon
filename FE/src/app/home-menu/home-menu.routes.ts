@@ -3,12 +3,15 @@ import {ConversationsComponent} from './conversations/conversations.component';
 import {SettingsComponent} from './settings/settings.component';
 import {HomeComponent} from './home/home.component';
 
-export const routes: Routes = [
+export const homeMenuRoutes: Routes = [
   {
     path: '',
     redirectTo: 'home',
-    component: HomeComponent,
     pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
   },
   {
     path: "conversations",

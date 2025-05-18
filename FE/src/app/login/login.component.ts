@@ -53,37 +53,37 @@ export class LoginComponent implements OnInit {
 
     verifyPassword() {
         console.log("login")
-        if (this.user.password == undefined) {
-            this.passwordError = "Password cannot be null";
-            return;
-        }
-
-        if (this.user.password.length < 8) {
-            this.passwordError = "Password must have at least 8 characters";
-            return
-        }
-
-        if (!/[A-Z]/.test(this.user.password)) {
-            this.passwordError = "Password must contain at least one uppercase";
-            return;
-        }
-
-        if (!/[a-z]/.test(this.user.password)) {
-            this.passwordError = "Password must contain at least one lowercase";
-            return;
-        }
-
-        if (!/[0-9]/.test(this.user.password)) {
-            this.passwordError = "Password must contain at least one digit";
-            return;
-        }
-
-        if (!/[!@#$%^&*(),.?":{}|<>]/.test(this.user.password)) {
-            this.passwordError = "Password must contain at least one special character";
-            return;
-        }
-
-        this.passwordError = "";
+      // if (this.user.password == undefined) {
+      //     this.passwordError = "Password cannot be null";
+      //     return;
+      // }
+      //
+      // if (this.user.password.length < 8) {
+      //     this.passwordError = "Password must have at least 8 characters";
+      //     return
+      // }
+      //
+      // if (!/[A-Z]/.test(this.user.password)) {
+      //     this.passwordError = "Password must contain at least one uppercase";
+      //     return;
+      // }
+      //
+      // if (!/[a-z]/.test(this.user.password)) {
+      //     this.passwordError = "Password must contain at least one lowercase";
+      //     return;
+      // }
+      //
+      // if (!/[0-9]/.test(this.user.password)) {
+      //     this.passwordError = "Password must contain at least one digit";
+      //     return;
+      // }
+      //
+      // if (!/[!@#$%^&*(),.?":{}|<>]/.test(this.user.password)) {
+      //     this.passwordError = "Password must contain at least one special character";
+      //     return;
+      // }
+      //
+      // this.passwordError = "";
     }
 
     confirmPassword(){

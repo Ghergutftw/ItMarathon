@@ -1,6 +1,7 @@
 import {Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {HomeMenuComponent} from './home-menu/home-menu.component';
+import {homeMenuRoutes} from './home-menu/home-menu.routes';
 
 export const routes: Routes = [
   {
@@ -14,7 +15,8 @@ export const routes: Routes = [
   },
   {
     path: 'home-menu',
-    component: HomeMenuComponent
+    component: HomeMenuComponent,
+    children: homeMenuRoutes
   }
 ];
 

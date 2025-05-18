@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {Router, RouterModule} from '@angular/router';
+import {RouterModule} from '@angular/router';
 
 @Component({
+    standalone: true,
     selector: 'app-home',
     imports: [RouterModule],
     templateUrl: './home.component.html',
@@ -9,12 +10,5 @@ import {Router, RouterModule} from '@angular/router';
 })
 export class HomeComponent {
 
-    constructor(
-        private router: Router
-    ) {
-    }
 
-    navigateTo(path: string) {
-        this.router.navigate([path]);
-    }
 }
