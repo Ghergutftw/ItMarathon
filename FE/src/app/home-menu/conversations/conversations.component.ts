@@ -85,6 +85,13 @@ export class ConversationsComponent implements OnInit {
 
     sendFriendRequest(foundUser: User) {
         foundUser.friendRequest?.push(this.user);
+        if (this.foundUser && this.foundUser.id) {
+            this.userService.update(this.foundUser.id).subscribe(response => {
+                if (response && response.body) {
+                    console.log("request sent");
+                }
+            })
+        }
     }
 
     getParticipantInAPeopleConversation(people: Conversation) {

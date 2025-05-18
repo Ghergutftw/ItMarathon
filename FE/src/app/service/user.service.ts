@@ -28,6 +28,10 @@ export class UserService {
         return this.http.get<User>(`${this.apiServerUrl}/user-service/find-by-name/${name}`, {observe: "response"})
     }
 
+    public update(userId: string): Observable<HttpResponse<any>> {
+        return this.http.put<HttpResponse<any>>(`${this.apiServerUrl}/user-service/${userId}`, {observe: "response"})
+    }
+
     // public logout(user: User): Observable<HttpResponse<any>> {
     //   return this.http.get<HttpResponse<any>>(`${this.apiServerUrl}/logout`, user)
     // }
