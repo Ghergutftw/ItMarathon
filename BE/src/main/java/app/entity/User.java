@@ -13,6 +13,8 @@ import java.util.UUID;
 
 @Entity
 @Data
+@Getter
+@Setter
 @Table(name = "users")
 public class User  {
 

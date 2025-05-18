@@ -1,7 +1,7 @@
-package dto;
+package app.dto;
 
-import entity.Conversation;
-import entity.User;
+import app.entity.Conversation;
+import app.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

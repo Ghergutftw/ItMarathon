@@ -13,7 +13,7 @@ export const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'home',
+    path: 'home-menu',
     component: HomeMenuComponent
   }
 ];

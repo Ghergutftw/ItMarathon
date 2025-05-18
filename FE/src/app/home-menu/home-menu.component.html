@@ -1,1 +1,11 @@
-<p>home-menu works!</p>
+<div class="app-container">
+  <aside class="sidebar">
+    <button (click)="navigateTo('/home')"> Home</button>
+    <button (click)="navigateTo('/conversations')"> Conversations</button>
+    <button (click)="navigateTo('/settings')"> Settings</button>
+  </aside>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

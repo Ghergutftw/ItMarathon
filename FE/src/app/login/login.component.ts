@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormsModule, NgForm} from '@angular/forms';
 import {User} from './user.model';
 import {Router} from "@angular/router";
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     onLogin(form: NgForm) {
         if (form.valid) {
             console.log('Login form submitted', this.user)
-            this.router.navigate(['/home']);
+          this.router.navigate(['/home-menu']);
         }
     }
 
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
             //ruta la home menu component
             //this.route
             console.log('Signup form submitted', this.user);
-            this.router.navigate(['/home']);
+          this.router.navigate(['/home-menu']);
         }
     }
 
