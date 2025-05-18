@@ -4,6 +4,7 @@ import app.enums.ROLES;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
+import org.hibernate.Remove;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.Instant;
@@ -14,9 +15,9 @@ import java.util.UUID;
 @Data
 @Table(name = "messages")
 public class Message {
+
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
