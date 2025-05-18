@@ -1,15 +1,15 @@
-package service;
+package app.service;
 
-import dto.Response;
-import dto.SignUpDTO;
-import dto.UserDTO;
-import entity.User;
-import enums.ROLES;
+import app.dto.Response;
+import app.dto.SignUpDTO;
+import app.dto.UserDTO;
+import app.entity.User;
+import app.repository.UserRepository;
+import app.enums.ROLES;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import repository.UserRepository;
 
 import java.util.Optional;
 import java.util.UUID;

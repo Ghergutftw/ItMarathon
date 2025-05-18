@@ -1,6 +1,6 @@
-package repository;
+package app.repository;
 
-import entity.Conversation;
+import app.entity.Conversation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

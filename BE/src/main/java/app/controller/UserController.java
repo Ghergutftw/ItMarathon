@@ -1,15 +1,13 @@
-package controller;
+package app.controller;
 
-import dto.Response;
-import dto.SignUpDTO;
-import dto.UserDTO;
-import entity.User;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import app.dto.Response;
+import app.dto.SignUpDTO;
+import app.dto.UserDTO;
+import app.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import service.UserService;
+import app.service.UserService;
 
 import java.util.UUID;
 
