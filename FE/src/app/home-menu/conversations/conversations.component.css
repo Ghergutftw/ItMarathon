@@ -6,6 +6,12 @@
   height: calc(100vh - 40px);
 }
 
+.fa-solid.fa-arrow-right.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 #convGroupsPeople{
   display: flex;
   flex-direction: column;

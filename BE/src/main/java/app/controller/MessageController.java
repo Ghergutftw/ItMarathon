@@ -36,9 +36,10 @@ public class MessageController {
     @PostMapping
     public ResponseEntity<Message> createMessage(
             @RequestParam("text") String text,
+            @RequestParam("user") String user,
             @RequestParam("image") MultipartFile image) throws IOException {
 
-        Message message = messageService.createMessage(text, image);
+        Message message = messageService.createMessage(text, image,user);
         return ResponseEntity.ok(message);
     }
 

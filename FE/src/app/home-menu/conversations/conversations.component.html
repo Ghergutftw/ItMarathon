@@ -28,7 +28,7 @@
   </div>
   <div id="messages">
     <div id="conversationName">
-      <h2>Nume</h2>
+      <h2>{{conversation.name}}</h2>
     </div>
     <div class="sent-message">
       <span>MESSAGE SENT</span>
@@ -71,9 +71,21 @@
 
     <div id="bottomSpacer"></div>
     <div id="typedMessageContainer">
-      <i class="fa-regular fa-file-image" style="color: #ffffff;"></i>
-      <input id="typedMessage">
-      <i class="fa-solid fa-arrow-right" style="color: #ffffff;"></i>
+      <label style="cursor: pointer;">
+        <i class="fa-regular fa-file-image" style="color: #ffffff;"></i>
+        <input
+          type="file"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+          style="display: none;"
+        >
+      </label>
+      <input id="typedMessage" [(ngModel)]="messageText">
+      <i class="fa-solid fa-arrow-right"
+         style="color: #ffffff; cursor: pointer;"
+         (click)="sendMessage()"
+         [title]="isLoading ? 'Sending...' : 'Send Message'">
+      </i>
     </div>
   </div>
 </div>

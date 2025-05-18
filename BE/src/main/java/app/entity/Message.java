@@ -23,10 +23,6 @@ public class Message {
     @Column(name = "MESSAGES_SENT", columnDefinition = "LONGBLOB", nullable = false)
     private byte[] imageData;
 
-    @Column(name = "role")
-    @Enumerated(EnumType.STRING)
-    private ROLES role;
-
     @OneToOne(fetch = FetchType.EAGER)
     private User fromUser;
 
@@ -52,14 +48,6 @@ public class Message {
 
     public void setImageData(byte[] imageData) {
         this.imageData = imageData;
-    }
-
-    public ROLES getRole() {
-        return role;
-    }
-
-    public void setRole(ROLES role) {
-        this.role = role;
     }
 
     public User getFromUser() {

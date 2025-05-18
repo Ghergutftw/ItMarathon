@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.user).subscribe({
         next: (response) => {
           if (response.body?.status === 'success') {
+            sessionStorage.setItem("user", JSON.stringify(this.user.name));
             this.router.navigate(['/home-menu']);
           } else {
             this.passwordError = 'Invalid credentials';

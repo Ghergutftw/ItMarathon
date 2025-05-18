@@ -18,4 +18,5 @@ public class ConversationDTO {
     public UUID id;
     public List<Message> messages;
     public List<User> users;
+    public String name;
 }

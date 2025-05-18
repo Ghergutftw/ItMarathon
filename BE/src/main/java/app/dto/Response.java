@@ -27,4 +27,11 @@ public class Response {
         return message;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

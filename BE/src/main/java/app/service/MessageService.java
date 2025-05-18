@@ -4,6 +4,7 @@ import app.dto.MessageDTO;
 import app.entity.Message;
 import app.entity.User;
 import app.repository.MessageRepository;
+import app.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.Instant;
-import java.util.Base64;
 import java.util.UUID;
 
 @Service
@@ -20,11 +20,13 @@ public class MessageService {
     private final MessageRepository messageRepository;
 
     private final SteganographyService steganographyService;
+    private final UserRepository userRepository;
 
     @Autowired
-    public MessageService(MessageRepository messageRepository, SteganographyService steganographyService) {
+    public MessageService(MessageRepository messageRepository, SteganographyService steganographyService, UserRepository userRepository) {
         this.messageRepository = messageRepository;
         this.steganographyService = steganographyService;
+        this.userRepository = userRepository;
     }
 
     public Message save(Message message) {
@@ -32,12 +34,15 @@ public class MessageService {
     }
 
 
-    public Message createMessage(String text, MultipartFile image) throws IOException {
+    public Message createMessage(String text, MultipartFile image, String user) throws IOException {
+        User fromUser = userRepository.findByName(user)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
         byte[] encryptedImage = SteganographyService.encryptTextInImage(image.getBytes(), text);
         Message message = new Message();
         message.setImageData(encryptedImage);
         message.setTimestamp(Instant.now());
+        message.setFromUser(fromUser);
         return messageRepository.save(message);
     }
 

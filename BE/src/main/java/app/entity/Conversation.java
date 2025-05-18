@@ -18,6 +18,8 @@ public class Conversation {
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
+    private String name;
+
     @OneToMany(fetch = FetchType.EAGER)
     private List<Message> messages = new ArrayList<>();
 

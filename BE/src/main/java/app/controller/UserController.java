@@ -52,7 +52,7 @@ public class UserController {
         return userService.updatePassword(updatePasswordDTO);
     }
 
-    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/login")
     public ResponseEntity<Response> login(@RequestBody SignUpDTO userLoginDTO) {
         return ResponseEntity.ok(userService.login(userLoginDTO));
     }

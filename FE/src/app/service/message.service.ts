@@ -10,10 +10,11 @@ export class MessageService {
 
   constructor(private http: HttpClient) { }
 
-  sendMessage(image: File, text: string): Observable<any> {
+  sendMessage(image: File, text: string , user: string): Observable<any> {
     const formData = new FormData();
     formData.append('image', image);
     formData.append('text', text);
+    formData.append('user', user);
 
     return this.http.post(this.apiUrl, formData, {
       reportProgress: true,

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import app.repository.UserRepository;
 
 import java.util.List;
+import java.util.Set;
 
 @Component
 @Slf4j
@@ -29,6 +30,7 @@ public class DataInitializer implements CommandLineRunner {
         user1.setPassword(passwordEncoder.encode("ghergut"));
         user1.setRole(ROLES.ADMIN);
 
+
         User user2 = new User();
         user2.setName("bianca");
         user2.setPassword(passwordEncoder.encode("haidau"));
@@ -38,6 +40,9 @@ public class DataInitializer implements CommandLineRunner {
         user3.setName("simona");
         user3.setPassword(passwordEncoder.encode("antal"));
         user3.setRole(ROLES.ADMIN);
+
+        user1.setFriends(Set.of(user1));
+        user2.setFriends(Set.of(user3));
 
         userRepository.saveAll(List.of(user1, user2, user3));
 
