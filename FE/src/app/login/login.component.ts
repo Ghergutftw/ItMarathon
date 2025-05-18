@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('container') containerRef?: ElementRef;
   @ViewChild('loginButton') loginButtonRef?: ElementRef;
   @ViewChild('signUpButton') signUpButtonRef?: ElementRef;
+  demo: boolean = true;
 
   constructor(
     private router: Router,
