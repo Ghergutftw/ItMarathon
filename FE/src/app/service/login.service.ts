@@ -1,4 +1,3 @@
-// src/app/core/services/login.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, tap, BehaviorSubject } from 'rxjs';
@@ -11,7 +10,6 @@ import {Response} from '../models/response.model';
   providedIn: 'root',
 })
 export class LoginService {
-  /** Base URL = http://localhost:8083/api/user-service (adjust if env differs) */
   private readonly BASE = `${environment.apiUrl}/user-service`;
 
   /** keeps current login status for app-wide consumption */
