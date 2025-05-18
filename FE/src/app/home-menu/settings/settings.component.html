@@ -20,6 +20,15 @@
   </div>
 
   <div class="settings-section">
+    <h2>Change theme</h2>
+    <select id="theme" name="theme" [(ngModel)]="selectedBackground">
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+    <button (click)="changeBackground()">Apply theme</button>
+  </div>
+
+  <div class="settings-section">
     <h2>Change name</h2>
     <input id="changedName" type="text" name="changedName">
     <button (click)="changeName()">Change name</button>

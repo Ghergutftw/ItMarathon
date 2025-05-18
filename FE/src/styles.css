@@ -5,7 +5,6 @@ html, body{
 }
 
 body{
-  background-color: #ecf0f1;
 }
 
 body.font-roboto {
@@ -30,4 +29,12 @@ body.font-medium {
 
 body.font-large {
   font-size: 20px;
+}
+
+body.bg-light {
+  background-color: #ecf0f1;
+}
+
+body.bg-dark {
+  background-color: #2c3e50;
 }
