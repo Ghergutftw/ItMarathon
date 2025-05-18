@@ -23,6 +23,10 @@ spring:
   data:
     rest:
       default-page-size: 20
+  servlet:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
 
 server:
   port: 8083
