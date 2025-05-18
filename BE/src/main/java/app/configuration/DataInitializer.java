@@ -25,18 +25,18 @@ public class DataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         User user1 = new User();
-        user1.setName("Madalin");
+        user1.setName("madalin");
         user1.setPassword(passwordEncoder.encode("ghergut"));
         user1.setRole(ROLES.ADMIN);
 
         User user2 = new User();
-        user2.setName("Bianca");
+        user2.setName("bianca");
         user2.setPassword(passwordEncoder.encode("haidau"));
         user2.setRole(ROLES.ADMIN);
 
         User user3 = new User();
-        user3.setName("Simona");
-        user3.setPassword(passwordEncoder.encode("Antal"));
+        user3.setName("simona");
+        user3.setPassword(passwordEncoder.encode("antal"));
         user3.setRole(ROLES.ADMIN);
 
         userRepository.saveAll(List.of(user1, user2, user3));

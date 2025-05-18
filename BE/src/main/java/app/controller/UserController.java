@@ -2,10 +2,13 @@ package app.controller;
 
 import app.dto.Response;
 import app.dto.SignUpDTO;
+import app.dto.UpdatePasswordDTO;
 import app.dto.UserDTO;
 import app.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import app.service.UserService;
 
@@ -21,12 +24,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Response createUser(@RequestBody SignUpDTO sign){
-        return userService.createUser(sign);
-    }
-
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Response deleteUser(@PathVariable String id){
@@ -39,10 +36,25 @@ public class UserController {
         return userService.updateUser(id, user);
     }
 
-    @PostMapping("/login")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public Response login(@RequestBody SignUpDTO userLoginDTO){
-        return userService.login(userLoginDTO);
+    @PostMapping("/signup")
+    public ResponseEntity<Response> createUser(@RequestBody SignUpDTO sign) {
+        return userService.createUser(sign);
+    }
+
+    @GetMapping("/check-name/{name}")
+    public ResponseEntity<Response> checkNameExists(@PathVariable String name) {
+        return userService.checkNameExists(name);
+    }
+
+    //update password with name
+    @PutMapping("/update-password")
+    public ResponseEntity<Response> updatePassword(@RequestBody UpdatePasswordDTO updatePasswordDTO) {
+        return userService.updatePassword(updatePasswordDTO);
+    }
+
+    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> login(@RequestBody SignUpDTO userLoginDTO) {
+        return ResponseEntity.ok(userService.login(userLoginDTO));
     }
 
     @GetMapping("/logout")

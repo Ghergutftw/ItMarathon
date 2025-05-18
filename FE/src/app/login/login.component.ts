@@ -4,6 +4,7 @@ import {User} from './user.model';
 import {Router} from "@angular/router";
 import {NgIf} from "@angular/common";
 import {MessageService} from '../service/message.service';
+import {LoginService} from '../service/login.service';
 
 @Component({
   selector: 'app-login',
@@ -29,11 +30,12 @@ export class LoginComponent implements OnInit {
   @ViewChild('container') containerRef?: ElementRef;
   @ViewChild('loginButton') loginButtonRef?: ElementRef;
   @ViewChild('signUpButton') signUpButtonRef?: ElementRef;
-  demo: boolean = true;
+  demo: boolean = false;
 
   constructor(
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private loginService: LoginService
   ) {
 
   }
@@ -57,19 +59,40 @@ export class LoginComponent implements OnInit {
 
   onLogin(form: NgForm) {
     if (form.valid) {
-      console.log('Login form submitted', this.user)
-      this.router.navigate(['/home-menu']);
+      this.loginService.login(this.user).subscribe({
+        next: (response) => {
+          if (response.body?.status === 'success') {
+            this.router.navigate(['/home-menu']);
+          } else {
+            this.passwordError = 'Invalid credentials';
+          }
+        },
+        error: () => {
+          this.passwordError = 'An error occurred during login';
+        }
+      });
     }
   }
 
   onSignUp(form: NgForm) {
     if (form.valid) {
-      //ruta la home menu component
-      //this.route
-      console.log('Signup form submitted', this.user);
-      this.router.navigate(['/home-menu']);
+      this.loginService.signUp(this.user).subscribe({
+        next: (response) => {
+          if (response.status === 'success') {
+            this.togglePanel();
+            this.router.navigate(['/']);
+          } else {
+            // optionally show a message from backend
+            alert(response.message || 'Sign up failed');
+          }
+        },
+        error: () => {
+          alert('An error occurred during sign up');
+        }
+      });
     }
   }
+
 
   verifyPassword() {
     console.log("login")
@@ -164,5 +187,9 @@ export class LoginComponent implements OnInit {
         this.error = err.error?.message || 'Failed to retrieve message';
       }
     });
+  }
+
+  forgotPassword() {
+    this.router.navigate(['/forgot-password'], { queryParams: { name: this.user.name } });
   }
 }

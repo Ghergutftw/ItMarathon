@@ -1,6 +1,7 @@
 package app.entity;
 
 import app.enums.ROLES;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -44,12 +45,15 @@ public class User  {
     private Boolean premium = false;
 
     @OneToMany( fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<User> friends = new HashSet<>();
 
     @OneToMany( fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<User> friendRequests = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<Conversation> conversations = new HashSet<>();
 
     public UUID getId() {
