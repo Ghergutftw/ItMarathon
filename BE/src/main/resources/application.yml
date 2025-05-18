@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    active: development
+  datasource:
+    url: jdbc:mysql://mysql:3306/mydatabase?useSSL=false&allowPublicKeyRetrieval=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: myuser
+    password: secret
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 10
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    open-in-view: false
+  application:
+    name: BE
+  data:
+    rest:
+      default-page-size: 20
+
+server:
+  port: 8083
+  servlet:
+    context-path: /api
+
+logging:
+  level:
+    org:
+      hibernate: INFO
+      springframework:
+        web: INFO
+        security: INFO
+    com:
+      yourpackage: DEBUG
