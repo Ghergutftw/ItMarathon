@@ -1,25 +1,21 @@
 package app.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 @Getter
 @Setter
-@Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response {
+    private String status;
+    private String message;
 
-    String status;
-    String message;
+    public Response() {
+    }
 
     public Response(String status, String message) {
         this.status = status;
         this.message = message;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

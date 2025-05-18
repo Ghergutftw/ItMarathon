@@ -2,12 +2,14 @@ package app.service;
 
 import app.dto.Response;
 import app.dto.SignUpDTO;
+import app.dto.UpdatePasswordDTO;
 import app.dto.UserDTO;
 import app.entity.User;
 import app.repository.UserRepository;
 import app.enums.ROLES;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,29 +18,54 @@ import java.util.UUID;
 
 @Service
 @Slf4j
-@AllArgsConstructor
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public Response createUser(SignUpDTO sign) {
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+//    Check if name exists
+    public ResponseEntity<Response> checkNameExists(String name) {
+        Optional<User> user = userRepository.findByName(name);
+        if (user.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(new Response("success", "Username exits"));
+        }
+        return ResponseEntity.ok(new Response("failed", "Username does not exist"));
+    }
+
+    public ResponseEntity<Response> createUser(SignUpDTO sign) {
         User user = new User();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(sign.getPassword());
-        if (user.getRole() == null) {
-            user.setRole(ROLES.USER);
-        }
+
+        user.setRole(ROLES.USER); // Set role explicitly
         user.setPassword(encodedPassword);
         user.setName(sign.getName());
         user.setEmail(sign.getEmail());
 
         userRepository.save(user);
 
-        return new Response("success", "User created successfully");
+        Response response = new Response("success", "User created successfully");
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    public ResponseEntity<Response> updatePassword(UpdatePasswordDTO updatePasswordDTO) {
+        Optional<User> user = userRepository.findByName(updatePasswordDTO.getName());
+        if (user.isPresent()) {
+            User existingUser = user.get();
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String encodedPassword = passwordEncoder.encode(updatePasswordDTO.getNewPassword());
+            existingUser.setPassword(encodedPassword);
+            userRepository.save(existingUser);
+            return ResponseEntity.ok(new Response("success", "Password updated successfully"));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Response("failed", "User not found"));
     }
 
     public Response login(SignUpDTO userToCheck) {
-        Optional<User> user = userRepository.findByEmail(userToCheck.getEmail());
+        Optional<User> user = userRepository.findByName(userToCheck.getName());
         if (user.isPresent()) {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             if (passwordEncoder.matches(userToCheck.getPassword(), user.get().getPassword())) {
