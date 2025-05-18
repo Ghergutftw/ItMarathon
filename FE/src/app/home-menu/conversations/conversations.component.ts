@@ -32,7 +32,7 @@ export class ConversationsComponent implements OnInit {
     messageId: string = '';
     isLoading = false;
     error: string | null = null;
-    user: string = '';
+    user!: User;
     groups: Conversation[] = [];
     peoples: Conversation[] = [];
 
@@ -45,12 +45,11 @@ export class ConversationsComponent implements OnInit {
 
     ngOnInit(): void {
         if (sessionStorage.getItem('user')) {
-            // @ts-ignore
-            this.user = sessionStorage.getItem('user');
+            this.user = JSON.parse(sessionStorage.getItem('user')!);
         }
 
-        if (this.user) {
-            this.conservationService.getConversationForUser(this.user).subscribe({
+        if (this.user && this.user.name) {
+            this.conservationService.getConversationForUser(this.user.name).subscribe({
                 next: (response) => {
                     this.groups = response.filter((conversation: Conversation) =>
                         Array.isArray(conversation.users) &&
@@ -60,7 +59,6 @@ export class ConversationsComponent implements OnInit {
                         Array.isArray(conversation.users) &&
                         conversation.users.length === 2);
 
-                    // Optional: Handle conversations with < 2 participants
                     const invalidConversations = response.filter((conversation: Conversation) =>
                         !Array.isArray(conversation.users) ||
                         conversation.users.length < 2);
@@ -86,7 +84,7 @@ export class ConversationsComponent implements OnInit {
     }
 
     sendFriendRequest(foundUser: User) {
-
+        foundUser.friendRequest?.push(this.user);
     }
 
     getParticipantInAPeopleConversation(people: Conversation) {
@@ -113,17 +111,19 @@ export class ConversationsComponent implements OnInit {
         this.isLoading = true;
         this.error = null;
 
-        this.messageService.sendMessage(this.selectedFile, this.messageText, this.user).subscribe({
-            next: (response) => {
-                this.isLoading = false;
-                this.messageId = response.id;
-                this.messageText = '';
-                this.selectedFile = null;
-            },
-            error: (err) => {
-                this.isLoading = false;
-                this.error = err.error?.message || 'Failed to send message';
-            }
-        });
+        if (this.user.name) {
+            this.messageService.sendMessage(this.selectedFile, this.messageText, this.user?.name).subscribe({
+                next: (response) => {
+                    this.isLoading = false;
+                    this.messageId = response.id;
+                    this.messageText = '';
+                    this.selectedFile = null;
+                },
+                error: (err) => {
+                    this.isLoading = false;
+                    this.error = err.error?.message || 'Failed to send message';
+                }
+            });
+        }
     }
 }
