@@ -4,7 +4,9 @@ import enums.ROLES;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -14,13 +16,13 @@ public class User  {
     @Id
     private UUID id;
 
-    @Column(unique = true)
+    @Column(unique = true , nullable = false)
     private String name;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String password;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
     private ROLES role;
@@ -34,9 +36,9 @@ public class User  {
     private Boolean premium;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<User> friends;
+    private Set<User> friends = new HashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<User> friendRequests;
+    private Set<User> friendRequests = new HashSet<>();
 
 }
