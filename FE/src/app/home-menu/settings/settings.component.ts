@@ -12,6 +12,7 @@ import {FormsModule} from '@angular/forms';
 export class SettingsComponent implements OnInit{
   selectedFont: string = '';
   selectedFontSize: string = '';
+  selectedBackground: string = '';
 
   ngOnInit() {
     const classList = document.body.classList;
@@ -32,6 +33,13 @@ export class SettingsComponent implements OnInit{
       this.selectedFontSize = 'large';
     } else {
       this.selectedFontSize = 'medium'; // default
+    }
+
+    // Background
+    if (classList.contains('bg-dark')) {
+      this.selectedBackground = 'dark';
+    } else {
+      this.selectedBackground = 'light'; // default
     }
   }
 
@@ -62,6 +70,18 @@ export class SettingsComponent implements OnInit{
       body.classList.add('font-medium'); // default
     }
   }
+
+  changeBackground() {
+    const body = document.body;
+    body.classList.remove('bg-light', 'bg-dark');
+
+    if (this.selectedBackground === 'dark') {
+      body.classList.add('bg-dark');
+    } else {
+      body.classList.add('bg-light');
+    }
+  }
+
 
   changeName(){
 
