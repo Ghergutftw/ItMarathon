@@ -1,0 +1,34 @@
+<div id="settings">
+  <div class="settings-section">
+    <h2>Change font</h2>
+    <select id="fonts" name="fonts" [(ngModel)]="selectedFont">
+      <option value="arial">Arial</option>
+      <option value="opensans">OpenSans</option>
+      <option value="roboto">Roboto</option>
+    </select>
+    <button (click)="changeFont()">Apply font</button>
+  </div>
+
+  <div class="settings-section">
+    <h2>Change font size</h2>
+    <select id="fontSizes" name="fontSizes" [(ngModel)]="selectedFontSize">
+      <option value="small">Small</option>
+      <option value="medium">Medium</option>
+      <option value="large">Large</option>
+    </select>
+    <button (click)="changeFontSize()">Apply font size</button>
+  </div>
+
+  <div class="settings-section">
+    <h2>Change name</h2>
+    <input id="changedName" type="text" name="changedName">
+    <button (click)="changeName()">Change name</button>
+  </div>
+
+  <div class="settings-section">
+    <h2>Change email</h2>
+    <input id="changedEmail" type="email" name="changedEmail">
+    <button (click)="changeEmail()">Change email</button>
+  </div>
+
+</div>

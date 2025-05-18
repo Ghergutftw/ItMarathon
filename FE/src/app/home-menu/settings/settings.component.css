@@ -1,0 +1,28 @@
+#settings{
+  display: flex;
+  align-items: start;
+
+  margin: 20px;
+  height: calc(100vh - 60px);
+  padding: 10px;
+
+  flex-direction: column;
+  gap: 20px;
+
+  border-radius: 20px;
+  box-shadow: 0 5px 5px #4353795c;
+  background-color: white;
+  color: black;
+}
+
+.settings-section{
+  margin: 0 20px;
+}
+
+h2 {
+  font-size: 1.2em;
+  font-family: inherit;
+  margin: 10px;
+  color: #3f5378;
+}
+
