@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.user).subscribe({
         next: (response) => {
           if (response.body?.status === 'success') {
-            sessionStorage.setItem("user", JSON.stringify(this.user.name).toString());
+            sessionStorage.setItem("user", JSON.stringify(this.user).toString());
             this.router.navigate(['/home-menu']);
           } else {
             this.passwordError = 'Invalid credentials';
@@ -80,7 +80,6 @@ export class LoginComponent implements OnInit {
             this.togglePanel();
             this.router.navigate(['/']);
           } else {
-            // optionally show a message from backend
             alert(response.message || 'Sign up failed');
           }
         },

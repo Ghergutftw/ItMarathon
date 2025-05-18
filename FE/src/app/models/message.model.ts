@@ -1,9 +1,9 @@
 import {Conversation, IConversation} from './conversation.model';
 import {IUser, User} from './user.model';
 
-export interface IMessageDTO {
-  id?: string;           // UUID as string
-  imageData?: Uint8Array | null;  // byte[] in Java → Uint8Array or possibly base64 string
+export interface IMessage {
+  id?: string;
+  imageData?: Uint8Array | null;
   message?: string;
   status?: string;
   fromUser?: IUser | null;
@@ -11,7 +11,7 @@ export interface IMessageDTO {
   report?: boolean;
 }
 
-export class MessageDTO implements IMessageDTO {
+export class Message implements IMessage {
   constructor(
     public id?: string,
     public imageData?: Uint8Array | null,
