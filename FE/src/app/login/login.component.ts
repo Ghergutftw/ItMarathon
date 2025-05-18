@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
-import { User } from './user.model';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {FormsModule, NgForm} from '@angular/forms';
+import {User} from './user.model';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -16,7 +17,10 @@ export class LoginComponent implements OnInit {
     @ViewChild('loginButton') loginButtonRef?: ElementRef;
     @ViewChild('signUpButton') signUpButtonRef?: ElementRef;
 
-    constructor() {}
+  constructor(
+    private router: Router) {
+
+  }
 
     ngOnInit() {
     }
@@ -31,12 +35,14 @@ export class LoginComponent implements OnInit {
     onLogin(form: NgForm) {
         if (form.valid) {
             console.log('Login form submitted', this.user)
+          this.router.navigate(['/home']);
         }
     }
 
     onSignUp(form: NgForm) {
         if (form.valid) {
             console.log('Signup form submitted', this.user);
+          this.router.navigate(['/home']);
         }
     }
 }
